@@ -7,18 +7,18 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-A lot of this (particularely for *Spotify* and *Genius*) comes from a nice post by [*RCharlie*](http://www.rcharlie.com/post/fitter-happier/). *RCharlie* is also the author of some `R` packages we'll be using: *sentify* and [*spotifyr*](https://cran.r-project.org/package=spotifyr).
+This is based on a custom package I'm developing in parallel: *songwriteR*.  You can install it like this:
+```{r, eval=FALSE}
+devtools::install_github('ajrominger/songwriteR')
+```
 
 ## *Spotify*
 
-First and foremost we should note that *Spotify* no longer supports location queries with its API.  Doing a little digging about how that could be done I found [this](https://stackoverflow.com/questions/11367264/solutions-for-finding-website-visitors-geolocation) and [this](http://freegeoip.net/?q=192.12.12.251).  I'll come back to that.
+First and foremost we should note that *Spotify* no longer supports location queries with its API.  Doing a little digging about how that could be done I found [this](https://stackoverflow.com/questions/11367264/solutions-for-finding-website-visitors-geolocation) and [this](http://freegeoip.net/?q=192.12.12.251).  I'll come back to that if we decide we'd like to get spatial data for *Spotify*.
 
-But before getting into the complex stuff, we can still use the *Spotify* API as is to access a metric of popularity, connections between songs, and the sonic "mood" of a song---its valance. We can most easily do all that with the `R` package *spotifyr*, which wraps the API. Install it through CRAN:
-```{r, eval=FALSE}
-install.packages('spotifyr') # also installs the many dependencies
-```
+We can still use the *Spotify* API as is to access a metric of popularity, connections between songs, and the sonic "mood" of a song. 
 
-Before using the API, through *spotifyr* or directly, we need to setup a dev account with *Spotify*. To do so follow the instructions [here](https://developer.spotify.com/web-api/tutorial/), starting at "Setting Up Your Account" (follow the re-direction link).
+Before using the API we need to setup a dev account with *Spotify*. To do so follow the instructions [here](https://developer.spotify.com/web-api/tutorial/), starting at "Setting Up Your Account" (follow the re-direct link).
 
 For using the *spotifyr* package we can save the account info to our `R` system:
 ```{r, eval=FALSE}
@@ -34,7 +34,7 @@ Sys.setenv(SPOTIFY_CLIENT_SECRET = '517774bfdcdc43688255cf00a5e65f3e')
 Now we're ready to go.  Let's start by just looking at one artist:
 
 ```{r}
-library(spotifyr)
+library(songwriteR)
 # note that a given name could match multiple artist names, so we need to deal with that
 # here i just take the first entry
 willie <- get_artists('willie nelson')$artist_uri[1]
