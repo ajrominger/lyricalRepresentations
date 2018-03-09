@@ -1,0 +1,12 @@
+---
+title: "Music APIs"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+A lot of this (particularely for *Spotify* and *Genius*) comes from a nice post by [RCharlie](http://www.rcharlie.com/post/fitter-happier/).
+
+## Spotify
