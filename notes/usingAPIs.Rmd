@@ -20,7 +20,13 @@ We can still use the *Spotify* API as is to access a metric of popularity, conne
 
 Before using the API we need to setup a dev account with *Spotify*. To do so follow the instructions [here](https://developer.spotify.com/web-api/tutorial/), starting at "Setting Up Your Account" (follow the re-direct link).
 
-For using the *spotifyr* package we can save the account info to our `R` system:
+I've writen an `R` package to interface with the API.  Install it from github like this:
+
+```{r, eval=FALSE}
+devtools::install_github('ajrominger/songwriteR')
+```
+
+For using the *songwriteR* package we can save the account info to our `R` system:
 ```{r, eval=FALSE}
 Sys.setenv(SPOTIFY_CLIENT_ID = [YOUR_CLIENT_ID])
 Sys.setenv(SPOTIFY_CLIENT_SECRET = [YOUR_CLIENT_SECRET])
@@ -37,7 +43,8 @@ Now we're ready to go.  Let's start by just looking at one artist:
 library(songwriteR)
 # note that a given name could match multiple artist names, so we need to deal with that
 # here i just take the first entry
-willie <- get_artists('willie nelson')$artist_uri[1]
+willie <- get_artists('willie nelson')$id[1]
+
 ```
 
 ## Genius
